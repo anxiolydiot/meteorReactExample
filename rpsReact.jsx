@@ -21,6 +21,26 @@ if (Meteor.isClient) { //browser code
       var compShoot = Math.floor(Math.Random()*(choices).length);
       var userShoot = go.target.getAttribute('shootDataNum');
       var outcome = rpsLogicAlgorithm.compare(userShoot, compShoot, choices);
+      this.setState({ compShoot:compShoot, userShoot:userShoot, outcome:outcome
+      });
+      gameHistory.insert({
+        user: Meteor.userId,
+        compShoot:compShoot,
+        userShoot:userShoot,
+        outcome:outcome});
+    },
+    render: function(){
+      var winsCount = 0;
+      return (
+        <div>
+          <h1> Rock, Paper, Scissors </h1>
+          <button className ="btn btn-default" onClick={this.rpsShoot} shootDataNum = '0'> 'Rock'</button>
+          <button className ="btn btn-default" onClick={this.rpsShoot} shootDataNum = '1'> 'Rock'</button>
+          <button className ="btn btn-default" onClick={this.rpsShoot} shootDataNum = '2'> 'Rock'</button>
+        )
+
+      })
+    }
     }
   });
 
